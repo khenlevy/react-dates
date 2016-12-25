@@ -116,11 +116,11 @@ export default class DateRangePickerInput extends React.Component {
     } = this.props;
 
     const previewStartDate = momentPreviewStartDate
-      ? momentPreviewStartDate.format('DD/MM/YYYY')
+      ? momentPreviewStartDate.format('MMM DD')
       : null;
 
     const previewEndDate = momentPreviewEndDate
-      ? momentPreviewEndDate.format('DD/MM/YYYY')
+      ? momentPreviewEndDate.format('MMM DD')
       : null;
 
     const startDateValue = previewStartDate || startDate || startDateString;

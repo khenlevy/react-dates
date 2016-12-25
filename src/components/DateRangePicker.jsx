@@ -179,6 +179,8 @@ export default class DateRangePicker extends React.Component {
       focusedInput,
       startDate,
       endDate,
+      previewStartDate,
+      previewEndDate,
       minimumNights,
       keepOpenOnDateSelect,
       onDayMouseEnter,
@@ -214,6 +216,8 @@ export default class DateRangePicker extends React.Component {
           focusedInput={focusedInput}
           startDate={startDate}
           endDate={endDate}
+          previewStartDate={previewStartDate}
+          previewEndDate={previewEndDate}
           monthFormat={monthFormat}
           withPortal={withPortal || withFullScreenPortal}
           hidden={!focusedInput}

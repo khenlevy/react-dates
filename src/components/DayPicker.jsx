@@ -6,11 +6,14 @@ import cx from 'classnames';
 
 import OutsideClickHandler from './OutsideClickHandler';
 import CalendarMonthGrid from './CalendarMonthGrid';
+import CalendarSummary from './CalendarSummary';
 import DayPickerNavigation from './DayPickerNavigation';
 
 import getTransformStyles from '../utils/getTransformStyles';
 
 import OrientationShape from '../shapes/OrientationShape';
+
+import momentPropTypes from 'react-moment-proptypes';
 
 import { HORIZONTAL_ORIENTATION, VERTICAL_ORIENTATION } from '../../constants';
 
@@ -31,6 +34,11 @@ const propTypes = {
 
   navPrev: PropTypes.node,
   navNext: PropTypes.node,
+
+  startDate: momentPropTypes.momentObj,
+  endDate: momentPropTypes.momentObj,
+  previewStartDate: momentPropTypes.momentObj,
+  previewEndDate: momentPropTypes.momentObj,
 
   onDayClick: PropTypes.func,
   onDayMouseDown: PropTypes.func,
@@ -135,6 +143,9 @@ export default class DayPicker extends React.Component {
 
   onPrevMonthClick(e) {
     if (e) e.preventDefault();
+    if (!this.state.displayPrevNav) {
+      return;
+    }
 
     if (this.props.onPrevMonthClick) {
       this.props.onPrevMonthClick(e);
@@ -159,6 +170,9 @@ export default class DayPicker extends React.Component {
 
   onNextMonthClick(e) {
     if (e) e.preventDefault();
+    if (!this.state.displayNextNav) {
+      return;
+    }
 
     if (this.props.onNextMonthClick) {
       this.props.onNextMonthClick(e);
@@ -397,6 +411,10 @@ export default class DayPicker extends React.Component {
       onDayMouseLeave,
       onOutsideClick,
       monthFormat,
+      startDate,
+      endDate,
+      previewStartDate,
+      previewEndDate,
     } = this.props;
 
     const numOfWeekHeaders = this.isVertical() ? 1 : numberOfMonths;
@@ -447,43 +465,51 @@ export default class DayPicker extends React.Component {
     const transformValue = `${transformType}(${translationValue}px)`;
 
     return (
-      <div className={dayPickerClassNames} style={dayPickerStyle} >
-        <OutsideClickHandler onOutsideClick={onOutsideClick}>
-          {this.renderNavigation()}
+      <div>
+        <div className={dayPickerClassNames} style={dayPickerStyle} >
+          <OutsideClickHandler onOutsideClick={onOutsideClick}>
+            {this.renderNavigation()}
 
-          <div className="DayPicker__week-headers">
-            {weekHeaders}
-          </div>
+            <div className="DayPicker__week-headers">
+              {weekHeaders}
+            </div>
 
-          <div
-            className={transitionContainerClasses}
-            ref="transitionContainer"
-            style={transitionContainerStyle}
-          >
-            <CalendarMonthGrid
-              ref="calendarMonthGrid"
-              transformValue={transformValue}
-              enableOutsideDays={enableOutsideDays}
-              firstVisibleMonthIndex={firstVisibleMonthIndex}
-              initialMonth={currentMonth}
-              isAnimating={isCalendarMonthGridAnimating}
-              modifiers={modifiers}
-              orientation={orientation}
-              withPortal={withPortal}
-              numberOfMonths={numberOfMonths}
-              onDayClick={onDayClick}
-              onDayMouseDown={onDayMouseDown}
-              onDayMouseUp={onDayMouseUp}
-              onDayTouchStart={onDayTouchStart}
-              onDayTouchEnd={onDayTouchEnd}
-              onDayTouchTap={onDayTouchTap}
-              onDayMouseEnter={onDayMouseEnter}
-              onDayMouseLeave={onDayMouseLeave}
-              onMonthTransitionEnd={this.updateStateAfterMonthTransition}
-              monthFormat={monthFormat}
-            />
-          </div>
-        </OutsideClickHandler>
+            <div
+              className={transitionContainerClasses}
+              ref="transitionContainer"
+              style={transitionContainerStyle}
+            >
+              <CalendarMonthGrid
+                ref="calendarMonthGrid"
+                transformValue={transformValue}
+                enableOutsideDays={enableOutsideDays}
+                firstVisibleMonthIndex={firstVisibleMonthIndex}
+                initialMonth={currentMonth}
+                isAnimating={isCalendarMonthGridAnimating}
+                modifiers={modifiers}
+                orientation={orientation}
+                withPortal={withPortal}
+                numberOfMonths={numberOfMonths}
+                onDayClick={onDayClick}
+                onDayMouseDown={onDayMouseDown}
+                onDayMouseUp={onDayMouseUp}
+                onDayTouchStart={onDayTouchStart}
+                onDayTouchEnd={onDayTouchEnd}
+                onDayTouchTap={onDayTouchTap}
+                onDayMouseEnter={onDayMouseEnter}
+                onDayMouseLeave={onDayMouseLeave}
+                onMonthTransitionEnd={this.updateStateAfterMonthTransition}
+                monthFormat={monthFormat}
+              />
+            </div>
+          </OutsideClickHandler>
+        </div>
+        <CalendarSummary
+          startDate={startDate}
+          endDate={endDate}
+          previewStartDate={previewStartDate}
+          previewEndDate={previewEndDate}
+        />
       </div>
     );
   }

@@ -23,6 +23,8 @@ import DayPicker from './DayPicker';
 const propTypes = {
   startDate: momentPropTypes.momentObj,
   endDate: momentPropTypes.momentObj,
+  previewStartDate: momentPropTypes.momentObj,
+  previewEndDate: momentPropTypes.momentObj,
   onDatesChange: PropTypes.func,
 
   focusedInput: FocusedInputShape,
@@ -245,6 +247,10 @@ export default class DayPickerRangeController extends React.Component {
 
   render() {
     const {
+      startDate,
+      endDate,
+      previewStartDate,
+      previewEndDate,
       isDayBlocked,
       isOutsideRange,
       numberOfMonths,
@@ -301,6 +307,10 @@ export default class DayPickerRangeController extends React.Component {
         onOutsideClick={onOutsideClick}
         navPrev={navPrev}
         navNext={navNext}
+        startDate={startDate}
+        endDate={endDate}
+        previewStartDate={previewStartDate}
+        previewEndDate={previewEndDate}
       />
     );
   }
