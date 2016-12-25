@@ -86,6 +86,8 @@ export default class DayPicker extends React.Component {
       currentMonth: props.hidden ? moment() : props.initialVisibleMonth(),
       monthTransition: null,
       translationValue: 0,
+      displayPrevNav: true,
+      displayNextNav: true,
     };
 
     this.onPrevMonthClick = this.onPrevMonthClick.bind(this);
@@ -98,6 +100,9 @@ export default class DayPicker extends React.Component {
       this.adjustDayPickerHeight();
       this.initializeDayPickerWidth();
     }
+
+    this.shouldDisplayNextMonthButton(this.state.currentMonth);
+    this.shouldDisplayPrevMonthButton(this.state.currentMonth);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -152,8 +157,25 @@ export default class DayPicker extends React.Component {
     });
   }
 
+  shouldDisplayPrevMonthButton(currentMonth) {
+    const currentDateMoment = moment(new Date());
+    const isCurrentMonth = currentMonth.isAfter(currentDateMoment, 'month');
+
+
+    this.setState({ displayPrevNav : isCurrentMonth });
+  }
+
+  shouldDisplayNextMonthButton(currentMonth) {
+    const currentDateMoment = moment(new Date());
+    const futureYear = moment(currentDateMoment).add(10, 'M');
+    const isNextYear = currentMonth.isSameOrBefore(futureYear, 'month');
+
+    this.setState({ displayNextNav : isNextYear });
+  }
+
   onNextMonthClick(e) {
     if (e) e.preventDefault();
+
     if (this.props.onNextMonthClick) {
       this.props.onNextMonthClick(e);
     }
@@ -262,6 +284,9 @@ export default class DayPicker extends React.Component {
       'none'
     );
 
+    this.shouldDisplayPrevMonthButton(newMonth);
+    this.shouldDisplayNextMonthButton(newMonth);
+
     this.setState({
       currentMonth: newMonth,
       monthTransition: null,
@@ -304,6 +329,10 @@ export default class DayPicker extends React.Component {
       navPrev,
       navNext,
     } = this.props;
+    const {
+      displayPrevNav,
+      displayNextNav,
+    } = this.state;
 
     return (
       <DayPickerNavigation
@@ -312,6 +341,8 @@ export default class DayPicker extends React.Component {
         navPrev={navPrev}
         navNext={navNext}
         isVertical={this.isVertical()}
+        displayPrevNav={displayPrevNav}
+        displayNextNav={displayNextNav}
       />
     );
   }

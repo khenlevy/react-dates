@@ -147,7 +147,21 @@ export default class DayPickerRangeController extends React.Component {
     this.props.onDatesChange({ startDate, endDate });
   }
 
-  onDayMouseEnter(day) {
+  onDayMouseEnter(day, modifiers, event) {
+    const { focusedInput } = this.props;
+    let { startDate, endDate } = this.props;
+    if (includes(modifiers, 'blocked')) return;
+
+    console.log({ day, modifiers, event });
+    if (focusedInput === START_DATE) {
+      startDate = day
+      // this.props.onDatesChange({ startDate });
+    }
+    if (focusedInput === END_DATE) {
+      endDate = day
+    }
+    // this.props.onDatesChange({ startDate, endDate });
+
     if (this.isTouchDevice) return;
 
     this.setState({

@@ -13,6 +13,7 @@ class DateRangePickerWrapper extends React.Component {
 
     this.onDatesChange = this.onDatesChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
+    this.handlePrevMonthClick = this.handlePrevMonthClick.bind(this);
   }
 
   onDatesChange({ startDate, endDate }) {
@@ -21,6 +22,10 @@ class DateRangePickerWrapper extends React.Component {
 
   onFocusChange(focusedInput) {
     this.setState({ focusedInput });
+  }
+
+  handlePrevMonthClick (a, b, c) {
+    console.log({a, b, c})
   }
 
   render() {
@@ -34,6 +39,7 @@ class DateRangePickerWrapper extends React.Component {
           focusedInput={focusedInput}
           startDate={startDate}
           endDate={endDate}
+          onPrevMonthClick={this.handlePrevMonthClick}
         />
       </div>
     );

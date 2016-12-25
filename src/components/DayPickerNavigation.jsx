@@ -30,6 +30,8 @@ export default function DayPickerNavigation(props) {
     isVertical,
     onPrevMonthClick,
     onNextMonthClick,
+    displayPrevNav,
+    displayNextNav
   } = props;
 
   let navPrevIcon = navPrev;
@@ -56,21 +58,40 @@ export default function DayPickerNavigation(props) {
     'DayPickerNavigation__next--default': isDefaultNavNext,
   });
 
-  return (
-    <div className={navClassNames}>
+  const renderPrevNav = () => {
+    if (!displayPrevNav) {
+      return null;
+    }
+
+    return (
       <span
         className={prevClassNames}
         onClick={onPrevMonthClick}
       >
-        {navPrevIcon}
+      {navPrevIcon}
       </span>
+    );
+  }
 
+  const renderNextNav = () => {
+    if (!displayNextNav) {
+      return null;
+    }
+
+    return (
       <span
         className={nextClassNames}
         onClick={onNextMonthClick}
       >
         {navNextIcon}
       </span>
+    )
+  }
+
+  return (
+    <div className={navClassNames}>
+      {renderPrevNav()}
+      {renderNextNav()}
     </div>
   );
 }
