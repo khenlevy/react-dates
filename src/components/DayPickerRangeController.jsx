@@ -56,6 +56,8 @@ const propTypes = {
   onNextMonthClick: PropTypes.func,
   onOutsideClick: PropTypes.func,
 
+  onPreviewDatesChange: PropTypes.func,
+
   // i18n
   monthFormat: PropTypes.string,
 };
@@ -104,7 +106,7 @@ export default class DayPickerRangeController extends React.Component {
     super(props);
     this.state = {
       hoverDate: null,
-      isPreview: false
+      isPreview: false,
     };
 
     this.isTouchDevice = isTouchDevice();
@@ -149,20 +151,20 @@ export default class DayPickerRangeController extends React.Component {
     this.props.onDatesChange({ startDate, endDate });
   }
 
-  onDayMouseEnter(day, modifiers, event) {
+  onDayMouseEnter(day, modifiers) {
     this.setState({
-      isPreview: true
+      isPreview: true,
     });
     const { focusedInput } = this.props;
     let { startDate, endDate } = this.props;
     if (includes(modifiers, 'blocked')) return;
 
     if (focusedInput === START_DATE) {
-      startDate = day
+      startDate = day;
       this.props.onPreviewDatesChange({ startDate });
     }
     if (focusedInput === END_DATE) {
-      endDate = day
+      endDate = day;
       this.props.onPreviewDatesChange({ endDate });
     }
 

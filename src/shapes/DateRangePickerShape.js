@@ -8,6 +8,8 @@ import anchorDirectionShape from '../shapes/AnchorDirectionShape';
 export default {
   startDate: momentPropTypes.momentObj,
   endDate: momentPropTypes.momentObj,
+  previewStartDate: momentPropTypes.momentObj,
+  previewEndDate: momentPropTypes.momentObj,
   focusedInput: FocusedInputShape,
   minimumNights: PropTypes.number,
   isDayBlocked: PropTypes.func,

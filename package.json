@@ -1,7 +1,7 @@
 {
-  "name": "react-dates",
-  "version": "4.1.2",
-  "description": "A responsive and accessible date range picker component built with React",
+  "name": "cwt-react-dates",
+  "version": "4.2.2",
+  "description": "Fork from react-dates. A responsive and accessible date range picker component built with React",
   "main": "index.js",
   "scripts": {
     "build": "npm run clean && npm run build:js && npm run build:css && npm run build:svg",

@@ -157,22 +157,6 @@ export default class DayPicker extends React.Component {
     });
   }
 
-  shouldDisplayPrevMonthButton(currentMonth) {
-    const currentDateMoment = moment(new Date());
-    const isCurrentMonth = currentMonth.isAfter(currentDateMoment, 'month');
-
-
-    this.setState({ displayPrevNav : isCurrentMonth });
-  }
-
-  shouldDisplayNextMonthButton(currentMonth) {
-    const currentDateMoment = moment(new Date());
-    const futureYear = moment(currentDateMoment).add(10, 'M');
-    const isNextYear = currentMonth.isSameOrBefore(futureYear, 'month');
-
-    this.setState({ displayNextNav : isNextYear });
-  }
-
   onNextMonthClick(e) {
     if (e) e.preventDefault();
 
@@ -205,6 +189,21 @@ export default class DayPicker extends React.Component {
       this.calculateDimension(caption, 'height', true, true) +
       this.calculateDimension(grid, 'height') + 1
     );
+  }
+
+  shouldDisplayPrevMonthButton(currentMonth) {
+    const currentDateMoment = moment(new Date());
+    const isCurrentMonth = currentMonth.isAfter(currentDateMoment, 'month');
+
+    this.setState({ displayPrevNav: isCurrentMonth });
+  }
+
+  shouldDisplayNextMonthButton(currentMonth) {
+    const currentDateMoment = moment(new Date());
+    const futureYear = moment(currentDateMoment).add(10, 'M');
+    const isNextYear = currentMonth.isSameOrBefore(futureYear, 'month');
+
+    this.setState({ displayNextNav: isNextYear });
   }
 
   applyTransformStyles(el, transform, opacity = '') {

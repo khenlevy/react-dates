@@ -24,6 +24,9 @@ const propTypes = {
   endDatePlaceholderText: PropTypes.string,
   isEndDateFocused: PropTypes.bool,
 
+  previewStartDate: momentPropTypes.momentObj,
+  previewEndDate: momentPropTypes.momentObj,
+
   showClearDates: PropTypes.bool,
   showCaret: PropTypes.bool,
   disabled: PropTypes.bool,

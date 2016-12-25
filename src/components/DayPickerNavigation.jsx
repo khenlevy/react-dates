@@ -13,6 +13,9 @@ const propTypes = {
 
   onPrevMonthClick: PropTypes.func,
   onNextMonthClick: PropTypes.func,
+
+  displayPrevNav: PropTypes.bool,
+  displayNextNav: PropTypes.bool,
 };
 const defaultProps = {
   navPrev: null,
@@ -31,7 +34,7 @@ export default function DayPickerNavigation(props) {
     onPrevMonthClick,
     onNextMonthClick,
     displayPrevNav,
-    displayNextNav
+    displayNextNav,
   } = props;
 
   let navPrevIcon = navPrev;
@@ -68,10 +71,10 @@ export default function DayPickerNavigation(props) {
         className={prevClassNames}
         onClick={onPrevMonthClick}
       >
-      {navPrevIcon}
+        {navPrevIcon}
       </span>
     );
-  }
+  };
 
   const renderNextNav = () => {
     if (!displayNextNav) {
@@ -85,8 +88,8 @@ export default function DayPickerNavigation(props) {
       >
         {navNextIcon}
       </span>
-    )
-  }
+    );
+  };
 
   return (
     <div className={navClassNames}>

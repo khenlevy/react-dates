@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
+import momentPropTypes from 'react-moment-proptypes';
 
 import DateInput from './DateInput';
 import RightArrow from '../svg/arrow-right.svg';
@@ -10,6 +11,8 @@ import { START_DATE, END_DATE } from '../../constants';
 const propTypes = {
   startDateId: PropTypes.string,
   startDatePlaceholderText: PropTypes.string,
+  previewStartDate: momentPropTypes.momentObj,
+  previewEndDate: momentPropTypes.momentObj,
 
   endDateId: PropTypes.string,
   endDatePlaceholderText: PropTypes.string,
@@ -109,16 +112,20 @@ export default class DateRangePickerInput extends React.Component {
       showCaret,
       phrases,
       previewStartDate: momentPreviewStartDate,
-      previewEndDate: momentPreviewEndDate
+      previewEndDate: momentPreviewEndDate,
     } = this.props;
 
-    const previewStartDate = momentPreviewStartDate ? momentPreviewStartDate.format('DD/MM/YYYY') : null;
-    const previewEndDate = momentPreviewEndDate ? momentPreviewEndDate.format('DD/MM/YYYY') : null;
+    const previewStartDate = momentPreviewStartDate
+      ? momentPreviewStartDate.format('DD/MM/YYYY')
+      : null;
+
+    const previewEndDate = momentPreviewEndDate
+      ? momentPreviewEndDate.format('DD/MM/YYYY')
+      : null;
 
     const startDateValue = previewStartDate || startDate || startDateString;
     const endDateValue = previewEndDate || endDate || endDateString;
 
-    console.log({ previewStartDate, previewEndDate })
     return (
       <div
         className={cx('DateRangePickerInput', {
