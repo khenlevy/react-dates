@@ -185,6 +185,7 @@ export default class DateRangePicker extends React.Component {
       onDayMouseLeave,
       onDayMouseDown,
       onDayTouchTap,
+      onPreviewDatesChange,
     } = this.props;
     const { dayPickerContainerStyles } = this.state;
 
@@ -208,6 +209,7 @@ export default class DateRangePicker extends React.Component {
           onPrevMonthClick={onPrevMonthClick}
           onNextMonthClick={onNextMonthClick}
           onDatesChange={onDatesChange}
+          onPreviewDatesChange={onPreviewDatesChange}
           onFocusChange={onFocusChange}
           focusedInput={focusedInput}
           startDate={startDate}
@@ -262,6 +264,8 @@ export default class DateRangePicker extends React.Component {
       keepOpenOnDateSelect,
       onDatesChange,
       onFocusChange,
+      previewStartDate,
+      previewEndDate,
     } = this.props;
 
     return (
@@ -287,6 +291,8 @@ export default class DateRangePicker extends React.Component {
           onDatesChange={onDatesChange}
           onFocusChange={onFocusChange}
           phrases={phrases}
+          previewStartDate={previewStartDate}
+          previewEndDate={previewEndDate}
         />
 
         {this.maybeRenderDayPickerWithPortal()}

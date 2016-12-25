@@ -191,6 +191,8 @@ export default class DateRangePickerInputWithHandlers extends React.Component {
       disabled,
       required,
       phrases,
+      previewStartDate,
+      previewEndDate,
     } = this.props;
 
     const startDateString = this.getDateString(startDate);
@@ -218,6 +220,8 @@ export default class DateRangePickerInputWithHandlers extends React.Component {
         onEndDateTab={this.onClearFocus}
         showClearDates={showClearDates}
         onClearDates={this.clearDates}
+        previewStartDate={previewStartDate}
+        previewEndDate={previewEndDate}
       />
     );
   }

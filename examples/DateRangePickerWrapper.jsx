@@ -9,15 +9,32 @@ class DateRangePickerWrapper extends React.Component {
       focusedInput: null,
       startDate: null,
       endDate: null,
+      previewStartDate: null,
+      previewEndDate: null
     };
 
     this.onDatesChange = this.onDatesChange.bind(this);
+    this.onPreviewDatesChange = this.onPreviewDatesChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
     this.handlePrevMonthClick = this.handlePrevMonthClick.bind(this);
   }
 
   onDatesChange({ startDate, endDate }) {
-    this.setState({ startDate, endDate });
+    const dates = { startDate, endDate };
+
+    if (startDate) {
+      dates.previewStartDate = null;
+    }
+
+    if (endDate) {
+      dates.previewEndDate = null;
+    }
+
+    this.setState(dates);
+  }
+
+  onPreviewDatesChange({ startDate: previewStartDate, endDate: previewEndDate }) {
+    this.setState({ previewStartDate, previewEndDate });
   }
 
   onFocusChange(focusedInput) {
@@ -35,10 +52,13 @@ class DateRangePickerWrapper extends React.Component {
         <DateRangePicker
           {...this.props}
           onDatesChange={this.onDatesChange}
+          onPreviewDatesChange={this.onPreviewDatesChange}
           onFocusChange={this.onFocusChange}
           focusedInput={focusedInput}
           startDate={startDate}
           endDate={endDate}
+          previewStartDate={this.state.previewStartDate}
+          previewEndDate={this.state.previewEndDate}
           onPrevMonthClick={this.handlePrevMonthClick}
         />
       </div>

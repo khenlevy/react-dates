@@ -108,11 +108,17 @@ export default class DateRangePickerInput extends React.Component {
       required,
       showCaret,
       phrases,
+      previewStartDate: momentPreviewStartDate,
+      previewEndDate: momentPreviewEndDate
     } = this.props;
 
-    const startDateValue = startDate || startDateString;
-    const endDateValue = endDate || endDateString;
+    const previewStartDate = momentPreviewStartDate ? momentPreviewStartDate.format('DD/MM/YYYY') : null;
+    const previewEndDate = momentPreviewEndDate ? momentPreviewEndDate.format('DD/MM/YYYY') : null;
 
+    const startDateValue = previewStartDate || startDate || startDateString;
+    const endDateValue = previewEndDate || endDate || endDateString;
+
+    console.log({ previewStartDate, previewEndDate })
     return (
       <div
         className={cx('DateRangePickerInput', {
@@ -127,7 +133,6 @@ export default class DateRangePickerInput extends React.Component {
           disabled={disabled}
           required={required}
           showCaret={showCaret}
-
           onChange={onStartDateChange}
           onFocus={onStartDateFocus}
           onKeyDownShiftTab={onStartDateShiftTab}

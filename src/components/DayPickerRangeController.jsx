@@ -104,6 +104,7 @@ export default class DayPickerRangeController extends React.Component {
     super(props);
     this.state = {
       hoverDate: null,
+      isPreview: false
     };
 
     this.isTouchDevice = isTouchDevice();
@@ -114,6 +115,7 @@ export default class DayPickerRangeController extends React.Component {
   }
 
   onDayClick(day, modifiers, e) {
+    this.setState({ isPreview: false });
     const { keepOpenOnDateSelect, minimumNights } = this.props;
     if (e) e.preventDefault();
     if (includes(modifiers, 'blocked')) return;
@@ -148,19 +150,21 @@ export default class DayPickerRangeController extends React.Component {
   }
 
   onDayMouseEnter(day, modifiers, event) {
+    this.setState({
+      isPreview: true
+    });
     const { focusedInput } = this.props;
     let { startDate, endDate } = this.props;
     if (includes(modifiers, 'blocked')) return;
 
-    console.log({ day, modifiers, event });
     if (focusedInput === START_DATE) {
       startDate = day
-      // this.props.onDatesChange({ startDate });
+      this.props.onPreviewDatesChange({ startDate });
     }
     if (focusedInput === END_DATE) {
       endDate = day
+      this.props.onPreviewDatesChange({ endDate });
     }
-    // this.props.onDatesChange({ startDate, endDate });
 
     if (this.isTouchDevice) return;
 
