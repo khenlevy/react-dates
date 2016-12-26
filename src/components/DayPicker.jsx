@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
+import momentPropTypes from 'react-moment-proptypes';
 import cx from 'classnames';
 
 import OutsideClickHandler from './OutsideClickHandler';
@@ -13,7 +14,6 @@ import getTransformStyles from '../utils/getTransformStyles';
 
 import OrientationShape from '../shapes/OrientationShape';
 
-import momentPropTypes from 'react-moment-proptypes';
 
 import { HORIZONTAL_ORIENTATION, VERTICAL_ORIENTATION } from '../../constants';
 

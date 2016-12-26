@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import momentPropTypes from 'react-moment-proptypes';
 // import moment from 'moment';
 
@@ -11,9 +11,9 @@ const propTypes = {
 };
 
 
-const CalendarSummary = ({ startDate, endDate, previewStartDate, previewEndDate }) => {
+const CalendarSummary = ({ startDate, endDate, previewEndDate }) => {
   const finishDate = previewEndDate || endDate;
-  if (!startDate || !finishDate) {
+  if (!startDate || !finishDate || finishDate.isBefore(startDate)) {
     return null;
   }
   return (

@@ -21,6 +21,10 @@ export default {
   showClearDates: PropTypes.bool,
   disabled: PropTypes.bool,
   required: PropTypes.bool,
+  inputWrapperClassNames: PropTypes.string,
+  inputStartFieldClassNames: PropTypes.string,
+  inputEndFieldClassNames: PropTypes.string,
+
 
   orientation: OrientationShape,
   anchorDirection: anchorDirectionShape,

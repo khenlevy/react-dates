@@ -232,6 +232,15 @@ export default class DayPickerRangeController extends React.Component {
     return day.isBetween(startDate, endDate);
   }
 
+  isAfterSelectedSpan(day) {
+    const { startDate, endDate } = this.props;
+    const { hoverDate } = this.state;
+
+    return day.isAfter(startDate)
+      && !day.isBetween(hoverDate, startDate)
+      && (day.isBetween(endDate, hoverDate) || day.isBetween(hoverDate, endDate));
+  }
+
   isLastInRange(day) {
     return this.isInSelectedSpan(day) && isNextDay(day, this.props.endDate);
   }
@@ -285,6 +294,7 @@ export default class DayPickerRangeController extends React.Component {
       'selected-start': day => this.isStartDate(day),
       'selected-end': day => this.isEndDate(day),
       'selected-span': day => this.isInSelectedSpan(day),
+      'after-selected-dates': day => this.isAfterSelectedSpan(day),
     };
 
     return (

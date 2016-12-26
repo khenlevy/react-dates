@@ -35,6 +35,10 @@ const propTypes = {
   required: PropTypes.bool,
   showCaret: PropTypes.bool,
 
+  inputWrapperClassNames: PropTypes.string,
+  inputStartFieldClassNames: PropTypes.string,
+  inputEndFieldClassNames: PropTypes.string,
+
   // i18n
   phrases: PropTypes.shape({
     clearDates: PropTypes.node,
@@ -113,6 +117,9 @@ export default class DateRangePickerInput extends React.Component {
       phrases,
       previewStartDate: momentPreviewStartDate,
       previewEndDate: momentPreviewEndDate,
+      inputWrapperClassNames = '',
+      inputStartFieldClassNames = '',
+      inputEndFieldClassNames = '',
     } = this.props;
 
     const previewStartDate = momentPreviewStartDate
@@ -126,42 +133,60 @@ export default class DateRangePickerInput extends React.Component {
     const startDateValue = previewStartDate || startDate || startDateString;
     const endDateValue = previewEndDate || endDate || endDateString;
 
-    return (
-      <div
-        className={cx('DateRangePickerInput', {
-          'DateRangePickerInput--disabled': disabled,
-        })}
-      >
-        <DateInput
-          id={startDateId}
-          placeholder={startDatePlaceholderText}
-          dateValue={startDateValue}
-          focused={isStartDateFocused}
-          disabled={disabled}
-          required={required}
-          showCaret={showCaret}
-          onChange={onStartDateChange}
-          onFocus={onStartDateFocus}
-          onKeyDownShiftTab={onStartDateShiftTab}
-        />
-
+    const renderMiddleIcon = () => {
+      console.log('');
+      return (
         <div className="DateRangePickerInput__arrow">
           <RightArrow />
         </div>
+      );
+    };
 
-        <DateInput
-          id={endDateId}
-          placeholder={endDatePlaceholderText}
-          dateValue={endDateValue}
-          focused={isEndDateFocused}
-          disabled={disabled}
-          required={required}
-          showCaret={showCaret}
+    return (
+      <div
+        className={cx(`DateRangePickerInput ${inputWrapperClassNames}`, {
+          'DateRangePickerInput--disabled': disabled,
+        })}
+      >
+        <div
+          className={cx('input-start', {
+            [`${inputStartFieldClassNames}`]: inputStartFieldClassNames !== '',
+          })}
+        >
+          <DateInput
+            id={startDateId}
+            placeholder={startDatePlaceholderText}
+            dateValue={startDateValue}
+            focused={isStartDateFocused}
+            disabled={disabled}
+            required={required}
+            showCaret={showCaret}
+            onChange={onStartDateChange}
+            onFocus={onStartDateFocus}
+            onKeyDownShiftTab={onStartDateShiftTab}
+          />
+        </div>
 
-          onChange={onEndDateChange}
-          onFocus={onEndDateFocus}
-          onKeyDownTab={onEndDateTab}
-        />
+        {true ? null : renderMiddleIcon()}
+
+        <div
+          className={cx('input-end', {
+            [`${inputEndFieldClassNames}`]: inputEndFieldClassNames !== '',
+          })}
+        >
+          <DateInput
+            id={endDateId}
+            placeholder={endDatePlaceholderText}
+            dateValue={endDateValue}
+            focused={isEndDateFocused}
+            disabled={disabled}
+            required={required}
+            showCaret={showCaret}
+            onChange={onEndDateChange}
+            onFocus={onEndDateFocus}
+            onKeyDownTab={onEndDateTab}
+          />
+        </div>
 
         {showClearDates &&
           <button

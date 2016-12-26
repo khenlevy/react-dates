@@ -32,6 +32,10 @@ const propTypes = {
   disabled: PropTypes.bool,
   required: PropTypes.bool,
 
+  inputWrapperClassNames: PropTypes.string,
+  inputStartFieldClassNames: PropTypes.string,
+  inputEndFieldClassNames: PropTypes.string,
+
   keepOpenOnDateSelect: PropTypes.bool,
   reopenPickerOnClearDates: PropTypes.bool,
   withFullScreenPortal: PropTypes.bool,
@@ -196,6 +200,9 @@ export default class DateRangePickerInputWithHandlers extends React.Component {
       phrases,
       previewStartDate,
       previewEndDate,
+      inputWrapperClassNames,
+      inputStartFieldClassNames,
+      inputEndFieldClassNames,
     } = this.props;
 
     const startDateString = this.getDateString(startDate);
@@ -225,6 +232,9 @@ export default class DateRangePickerInputWithHandlers extends React.Component {
         onClearDates={this.clearDates}
         previewStartDate={previewStartDate}
         previewEndDate={previewEndDate}
+        inputWrapperClassNames={inputWrapperClassNames}
+        inputStartFieldClassNames={inputStartFieldClassNames}
+        inputEndFieldClassNames={inputEndFieldClassNames}
       />
     );
   }
