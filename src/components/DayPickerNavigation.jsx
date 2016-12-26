@@ -64,7 +64,6 @@ export default function DayPickerNavigation(props) {
   });
 
   const renderPrevNav = () => {
-    console.log('');
     return (
       <span
         className={prevClassNames}
@@ -76,7 +75,6 @@ export default function DayPickerNavigation(props) {
   };
 
   const renderNextNav = () => {
-    console.log('');
     return (
       <span
         className={nextClassNames}

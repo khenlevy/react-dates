@@ -134,7 +134,6 @@ export default class DateRangePickerInput extends React.Component {
     const endDateValue = previewEndDate || endDate || endDateString;
 
     const renderMiddleIcon = () => {
-      console.log('');
       return (
         <div className="DateRangePickerInput__arrow">
           <RightArrow />
