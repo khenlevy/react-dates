@@ -38,6 +38,10 @@ const propTypes = {
   inputWrapperClassNames: PropTypes.string,
   inputStartFieldClassNames: PropTypes.string,
   inputEndFieldClassNames: PropTypes.string,
+  inputLabelStart: PropTypes.string,
+  inputLabelEnd: PropTypes.string,
+  customStartIcon: PropTypes.node,
+  customEndIcon: PropTypes.node,
 
   // i18n
   phrases: PropTypes.shape({
@@ -120,6 +124,10 @@ export default class DateRangePickerInput extends React.Component {
       inputWrapperClassNames = '',
       inputStartFieldClassNames = '',
       inputEndFieldClassNames = '',
+      inputLabelStart = null,
+      inputLabelEnd = null,
+      customStartIcon = null,
+      customEndIcon = null,
     } = this.props;
 
     const previewStartDate = momentPreviewStartDate
@@ -152,6 +160,9 @@ export default class DateRangePickerInput extends React.Component {
             [`${inputStartFieldClassNames}`]: inputStartFieldClassNames !== '',
           })}
         >
+          {inputLabelStart !== null
+            ? <div className={`input-${inputLabelStart.replace(/ +/g, '')}`}>{inputLabelStart}</div>
+            : null}
           <DateInput
             id={startDateId}
             placeholder={startDatePlaceholderText}
@@ -164,6 +175,9 @@ export default class DateRangePickerInput extends React.Component {
             onFocus={onStartDateFocus}
             onKeyDownShiftTab={onStartDateShiftTab}
           />
+          {customStartIcon !== null
+            ? <div className="custom-start-icon">{customStartIcon}</div>
+            : null}
         </div>
 
         {true ? null : renderMiddleIcon()}
@@ -173,6 +187,9 @@ export default class DateRangePickerInput extends React.Component {
             [`${inputEndFieldClassNames}`]: inputEndFieldClassNames !== '',
           })}
         >
+          {inputLabelEnd !== null
+            ? <div className={`input-${inputLabelEnd.replace(/ +/g, '')}`}>{inputLabelEnd}</div>
+            : null}
           <DateInput
             id={endDateId}
             placeholder={endDatePlaceholderText}
@@ -185,6 +202,9 @@ export default class DateRangePickerInput extends React.Component {
             onFocus={onEndDateFocus}
             onKeyDownTab={onEndDateTab}
           />
+          {customEndIcon !== null
+            ? <div className="custom-end-icon">{customEndIcon}</div>
+            : null}
         </div>
 
         {showClearDates &&

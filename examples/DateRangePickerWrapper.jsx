@@ -54,6 +54,10 @@ class DateRangePickerWrapper extends React.Component {
           endDate={endDate}
           previewStartDate={this.state.previewStartDate}
           previewEndDate={this.state.previewEndDate}
+          inputLabelStart="Start Label"
+          inputLabelEnd="End Label"
+          customStartIcon={<glyph>S</glyph>}
+          customEndIcon={<glyph>E</glyph>}
           displayFormat="ddd, MMM DD"
           inputWrapperClassNames="class-name-1 class-name-2"
           inputStartFieldClassNames="start-class-1 start-class-2"
