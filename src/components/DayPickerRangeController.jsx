@@ -235,10 +235,12 @@ export default class DayPickerRangeController extends React.Component {
   isAfterSelectedSpan(day) {
     const { startDate, endDate } = this.props;
     const { hoverDate } = this.state;
+    // TBD: this rule needs Work what happens before start date
 
-    return day.isAfter(startDate)
-      && !day.isBetween(hoverDate, startDate)
-      && (day.isBetween(endDate, hoverDate) || day.isBetween(hoverDate, endDate));
+    // return day.isAfter(startDate)
+    //   && !day.isBetween(hoverDate, startDate)
+    //   && (day.isBetween(endDate, hoverDate) || day.isBetween(hoverDate, endDate));
+    return false;
   }
 
   isLastInRange(day) {
