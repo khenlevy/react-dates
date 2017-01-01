@@ -1,6 +1,6 @@
 {
   "name": "cwt-react-dates",
-  "version": "4.6.2",
+  "version": "4.7.2",
   "description": "Fork from react-dates. A responsive and accessible date range picker component built with React",
   "main": "index.js",
   "scripts": {
