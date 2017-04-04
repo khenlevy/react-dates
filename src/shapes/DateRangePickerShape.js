@@ -10,6 +10,10 @@ export default {
   endDate: momentPropTypes.momentObj,
   previewStartDate: momentPropTypes.momentObj,
   previewEndDate: momentPropTypes.momentObj,
+  inputLabelStart: PropTypes.string,
+  inputLabelEnd: PropTypes.string,
+  customStartIcon: PropTypes.node,
+  customEndIcon: PropTypes.node,
   focusedInput: FocusedInputShape,
   minimumNights: PropTypes.number,
   isDayBlocked: PropTypes.func,
@@ -21,6 +25,10 @@ export default {
   showClearDates: PropTypes.bool,
   disabled: PropTypes.bool,
   required: PropTypes.bool,
+  inputWrapperClassNames: PropTypes.string,
+  inputStartFieldClassNames: PropTypes.string,
+  inputEndFieldClassNames: PropTypes.string,
+
 
   orientation: OrientationShape,
   anchorDirection: anchorDirectionShape,

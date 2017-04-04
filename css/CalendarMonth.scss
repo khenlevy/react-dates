@@ -93,6 +93,10 @@
   }
 }
 
+.CalendarMonth__day--after-selected-dates {
+  background: yellow;
+}
+
 .CalendarMonth__day--hovered-span,
 .CalendarMonth__day--after-hovered-start {
   background: $react-dates-color-primary-shade-4;

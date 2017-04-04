@@ -35,6 +35,14 @@ const propTypes = {
   required: PropTypes.bool,
   showCaret: PropTypes.bool,
 
+  inputWrapperClassNames: PropTypes.string,
+  inputStartFieldClassNames: PropTypes.string,
+  inputEndFieldClassNames: PropTypes.string,
+  inputLabelStart: PropTypes.string,
+  inputLabelEnd: PropTypes.string,
+  customStartIcon: PropTypes.node,
+  customEndIcon: PropTypes.node,
+
   // i18n
   phrases: PropTypes.shape({
     clearDates: PropTypes.node,
@@ -113,55 +121,91 @@ export default class DateRangePickerInput extends React.Component {
       phrases,
       previewStartDate: momentPreviewStartDate,
       previewEndDate: momentPreviewEndDate,
+      inputWrapperClassNames = '',
+      inputStartFieldClassNames = '',
+      inputEndFieldClassNames = '',
+      inputLabelStart = null,
+      inputLabelEnd = null,
+      customStartIcon = null,
+      customEndIcon = null,
     } = this.props;
 
     const previewStartDate = momentPreviewStartDate
-      ? momentPreviewStartDate.format('DD/MM/YYYY')
+      ? momentPreviewStartDate.format('MMM DD')
       : null;
 
     const previewEndDate = momentPreviewEndDate
-      ? momentPreviewEndDate.format('DD/MM/YYYY')
+      ? momentPreviewEndDate.format('MMM DD')
       : null;
 
     const startDateValue = previewStartDate || startDate || startDateString;
     const endDateValue = previewEndDate || endDate || endDateString;
 
-    return (
-      <div
-        className={cx('DateRangePickerInput', {
-          'DateRangePickerInput--disabled': disabled,
-        })}
-      >
-        <DateInput
-          id={startDateId}
-          placeholder={startDatePlaceholderText}
-          dateValue={startDateValue}
-          focused={isStartDateFocused}
-          disabled={disabled}
-          required={required}
-          showCaret={showCaret}
-          onChange={onStartDateChange}
-          onFocus={onStartDateFocus}
-          onKeyDownShiftTab={onStartDateShiftTab}
-        />
-
+    const renderMiddleIcon = () => {
+      return (
         <div className="DateRangePickerInput__arrow">
           <RightArrow />
         </div>
+      );
+    };
 
-        <DateInput
-          id={endDateId}
-          placeholder={endDatePlaceholderText}
-          dateValue={endDateValue}
-          focused={isEndDateFocused}
-          disabled={disabled}
-          required={required}
-          showCaret={showCaret}
+    return (
+      <div
+        className={cx(`DateRangePickerInput ${inputWrapperClassNames}`, {
+          'DateRangePickerInput--disabled': disabled,
+        })}
+      >
+        <div
+          className={cx('input-start', {
+            [`${inputStartFieldClassNames}`]: inputStartFieldClassNames !== '',
+          })}
+        >
+          {inputLabelStart !== null
+            ? <div className={`input-${inputLabelStart.replace(/ +/g, '')}`}>{inputLabelStart}</div>
+            : null}
+          <DateInput
+            id={startDateId}
+            placeholder={startDatePlaceholderText}
+            dateValue={startDateValue}
+            focused={isStartDateFocused}
+            disabled={disabled}
+            required={required}
+            showCaret={showCaret}
+            onChange={onStartDateChange}
+            onFocus={onStartDateFocus}
+            onKeyDownShiftTab={onStartDateShiftTab}
+          />
+          {customStartIcon !== null
+            ? <div className="custom-start-icon">{customStartIcon}</div>
+            : null}
+        </div>
 
-          onChange={onEndDateChange}
-          onFocus={onEndDateFocus}
-          onKeyDownTab={onEndDateTab}
-        />
+        {true ? null : renderMiddleIcon()}
+
+        <div
+          className={cx('input-end', {
+            [`${inputEndFieldClassNames}`]: inputEndFieldClassNames !== '',
+          })}
+        >
+          {inputLabelEnd !== null
+            ? <div className={`input-${inputLabelEnd.replace(/ +/g, '')}`}>{inputLabelEnd}</div>
+            : null}
+          <DateInput
+            id={endDateId}
+            placeholder={endDatePlaceholderText}
+            dateValue={endDateValue}
+            focused={isEndDateFocused}
+            disabled={disabled}
+            required={required}
+            showCaret={showCaret}
+            onChange={onEndDateChange}
+            onFocus={onEndDateFocus}
+            onKeyDownTab={onEndDateTab}
+          />
+          {customEndIcon !== null
+            ? <div className="custom-end-icon">{customEndIcon}</div>
+            : null}
+        </div>
 
         {showClearDates &&
           <button

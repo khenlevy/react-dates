@@ -10,13 +10,12 @@ class DateRangePickerWrapper extends React.Component {
       startDate: null,
       endDate: null,
       previewStartDate: null,
-      previewEndDate: null
+      previewEndDate: null,
     };
 
     this.onDatesChange = this.onDatesChange.bind(this);
     this.onPreviewDatesChange = this.onPreviewDatesChange.bind(this);
     this.onFocusChange = this.onFocusChange.bind(this);
-    this.handlePrevMonthClick = this.handlePrevMonthClick.bind(this);
   }
 
   onDatesChange({ startDate, endDate }) {
@@ -55,6 +54,14 @@ class DateRangePickerWrapper extends React.Component {
           endDate={endDate}
           previewStartDate={this.state.previewStartDate}
           previewEndDate={this.state.previewEndDate}
+          inputLabelStart="Start Label"
+          inputLabelEnd="End Label"
+          customStartIcon={<glyph>S</glyph>}
+          customEndIcon={<glyph>E</glyph>}
+          displayFormat="ddd, MMM DD"
+          inputWrapperClassNames="class-name-1 class-name-2"
+          inputStartFieldClassNames="start-class-1 start-class-2"
+          inputEndFieldClassNames="end-class-1 end-class-2"
         />
       </div>
     );

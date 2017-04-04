@@ -179,6 +179,8 @@ export default class DateRangePicker extends React.Component {
       focusedInput,
       startDate,
       endDate,
+      previewStartDate,
+      previewEndDate,
       minimumNights,
       keepOpenOnDateSelect,
       onDayMouseEnter,
@@ -214,6 +216,8 @@ export default class DateRangePicker extends React.Component {
           focusedInput={focusedInput}
           startDate={startDate}
           endDate={endDate}
+          previewStartDate={previewStartDate}
+          previewEndDate={previewEndDate}
           monthFormat={monthFormat}
           withPortal={withPortal || withFullScreenPortal}
           hidden={!focusedInput}
@@ -266,6 +270,13 @@ export default class DateRangePicker extends React.Component {
       onFocusChange,
       previewStartDate,
       previewEndDate,
+      inputLabelStart,
+      inputLabelEnd,
+      customStartIcon,
+      customEndIcon,
+      inputWrapperClassNames,
+      inputStartFieldClassNames,
+      inputEndFieldClassNames,
     } = this.props;
 
     return (
@@ -293,6 +304,13 @@ export default class DateRangePicker extends React.Component {
           phrases={phrases}
           previewStartDate={previewStartDate}
           previewEndDate={previewEndDate}
+          inputLabelStart={inputLabelStart}
+          inputLabelEnd={inputLabelEnd}
+          customStartIcon={customStartIcon}
+          customEndIcon={customEndIcon}
+          inputWrapperClassNames={inputWrapperClassNames}
+          inputStartFieldClassNames={inputStartFieldClassNames}
+          inputEndFieldClassNames={inputEndFieldClassNames}
         />
 
         {this.maybeRenderDayPickerWithPortal()}

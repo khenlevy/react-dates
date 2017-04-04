@@ -56,16 +56,14 @@ export default function DayPickerNavigation(props) {
   });
   const prevClassNames = cx('DayPickerNavigation__prev', {
     'DayPickerNavigation__prev--default': isDefaultNavPrev,
+    disabled: !displayPrevNav,
   });
   const nextClassNames = cx('DayPickerNavigation__next', {
     'DayPickerNavigation__next--default': isDefaultNavNext,
+    disabled: !displayNextNav,
   });
 
   const renderPrevNav = () => {
-    if (!displayPrevNav) {
-      return null;
-    }
-
     return (
       <span
         className={prevClassNames}
@@ -77,10 +75,6 @@ export default function DayPickerNavigation(props) {
   };
 
   const renderNextNav = () => {
-    if (!displayNextNav) {
-      return null;
-    }
-
     return (
       <span
         className={nextClassNames}

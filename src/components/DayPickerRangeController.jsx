@@ -23,6 +23,8 @@ import DayPicker from './DayPicker';
 const propTypes = {
   startDate: momentPropTypes.momentObj,
   endDate: momentPropTypes.momentObj,
+  previewStartDate: momentPropTypes.momentObj,
+  previewEndDate: momentPropTypes.momentObj,
   onDatesChange: PropTypes.func,
 
   focusedInput: FocusedInputShape,
@@ -230,6 +232,17 @@ export default class DayPickerRangeController extends React.Component {
     return day.isBetween(startDate, endDate);
   }
 
+  isAfterSelectedSpan(day) {
+    const { startDate, endDate } = this.props;
+    const { hoverDate } = this.state;
+    // TBD: this rule needs Work what happens before start date
+
+    // return day.isAfter(startDate)
+    //   && !day.isBetween(hoverDate, startDate)
+    //   && (day.isBetween(endDate, hoverDate) || day.isBetween(hoverDate, endDate));
+    return false;
+  }
+
   isLastInRange(day) {
     return this.isInSelectedSpan(day) && isNextDay(day, this.props.endDate);
   }
@@ -245,6 +258,10 @@ export default class DayPickerRangeController extends React.Component {
 
   render() {
     const {
+      startDate,
+      endDate,
+      previewStartDate,
+      previewEndDate,
       isDayBlocked,
       isOutsideRange,
       numberOfMonths,
@@ -279,6 +296,7 @@ export default class DayPickerRangeController extends React.Component {
       'selected-start': day => this.isStartDate(day),
       'selected-end': day => this.isEndDate(day),
       'selected-span': day => this.isInSelectedSpan(day),
+      'after-selected-dates': day => this.isAfterSelectedSpan(day),
     };
 
     return (
@@ -301,6 +319,10 @@ export default class DayPickerRangeController extends React.Component {
         onOutsideClick={onOutsideClick}
         navPrev={navPrev}
         navNext={navNext}
+        startDate={startDate}
+        endDate={endDate}
+        previewStartDate={previewStartDate}
+        previewEndDate={previewEndDate}
       />
     );
   }
